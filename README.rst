@@ -11,7 +11,7 @@ To get started, make sure you have the necessary permissions and clone the repos
 
 .. code-block:: bash
 
-   git clone git@github.com:nperraud/demopkg.git
+   git https://github.com/nperraud/demopkg.git
    cd demopkg
 
 Working with Poetry
@@ -30,19 +30,24 @@ Activate the Poetry shell and install the dependencies:
    poetry shell
    poetry install
 
-To add an additional package to the project, use the add command. For example:
+Working with Conda
+==================
+
+To install miniconda, run the following command in the terminal:
+
+.. code-block:: bash
+   
+      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+      bash Miniconda3-latest-Linux-x86_64.sh
+
+Create a conda environment and install the dependencies:
 
 .. code-block:: bash
 
-   poetry add numpy
+   conda create -n demopkg python=3.11
+   conda activate demopkg
+   conda 
 
-To run tests, use the following command:
-
-.. code-block:: bash
-
-    pytest .
-
-The tests code are located in the folder demopkg/tests.
 
 Tests
 -----
