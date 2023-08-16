@@ -11,8 +11,8 @@ To get started, make sure you have the necessary permissions and clone the repos
 
 .. code-block:: bash
 
-   git clone 
-   cd code-template-lightning
+   git clone git@github.com:nperraud/demopkg.git
+   cd demopkg
 
 Working with Poetry
 ====================

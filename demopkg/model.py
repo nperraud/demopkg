@@ -1,4 +1,4 @@
-
+from torch import nn
 
 class MLP(nn.Module):
     """Multi-layer perceptron model.
@@ -50,4 +50,3 @@ class MLP(nn.Module):
         if self.use_softmax:
             x = nn.functional.softmax(x, dim=1)
         return x
-

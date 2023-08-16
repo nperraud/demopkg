@@ -7,10 +7,9 @@ build
 **#
 **~
 .DS_Store
-
-
 doc/_build/
 doc/backrefs/
 doc/examples/
 datasets/
 outputs/
+**/wandb/
