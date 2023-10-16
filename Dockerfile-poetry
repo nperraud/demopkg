@@ -1,0 +1,23 @@
+FROM python:3.11-slim-bookworm
+RUN groupadd --gid 1000 jovyan && \
+    useradd --uid 1000 --gid 1000 -s /usr/bin/bash -m jovyan
+USER jovyan
+WORKDIR /home/jovyan
+ENV PATH="$PATH:/home/jovyan/.local/bin" 
+COPY --chown=jovyan pyproject.toml poetry.lock ./
+ADD --chown=jovyan https://install.python-poetry.org install_poetry.py
+RUN python3 install_poetry.py && \
+    poetry config virtualenvs.create false && \
+    rm install_poetry.py
+# VIRTUAL_ENV variable is needed for poetry to know that it is in an acivated virtualenv
+# and install the dependencies from pyproject.yaml there.
+ENV VIRTUAL_ENV="/home/jovyan/.env" 
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN python3 -m venv ${VIRTUAL_ENV} && \
+    poetry install && \
+    poetry cache list | xargs -I {} poetry cache clear --all {} && \
+    rm pyproject.toml poetry.lock
+ENTRYPOINT [ "jupyter", "server" ]
+CMD [ "--port=8888", "--ip=0.0.0.0", "--no-browser", "-y", "--ServerApp.default_url=/lab" ]
+
+# To run use docker run -ti --rm -p 8888:8888 -v $PWD:/home/jovyan/work -w /home/jovyan/work image
