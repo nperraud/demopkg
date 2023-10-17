@@ -44,20 +44,22 @@ docker rm <container-name-or-id>
 
 ## Entrypoint headaches
 
-1. Navigate to the `entrypoint-headaches` folder
-2. Build the image by using the `docker build` command
+1. Create a Dockerhub account at https://hub.docker.com/signup if you don't already have one.
+2. Log into Dockerhub with the `docker login` command.
+3. Navigate to the `entrypoint-headaches` folder
+4. Build the image by using the `docker build` command
 
 ```bash
 docker build -t <Your-dockerhub-username>/docker-headaches:0.0.1 .
 ```
 
-3. Push the image to a the Dockerhub registry
+5. Push the image to a the Dockerhub registry
 
 ```bash
 docker push <Your-dockerhub-username>/docker-headaches:0.0.1
 ```
 
-4. Run the commands below and note the differences
+6. Run the commands below and note the differences
 
 ```bash
 docker run --entrypoint python image
@@ -68,7 +70,7 @@ docker run image “python script.py $ENV_VAR1”
 docker run image ‘python script.py $ENV_VAR1’
 ```
 
-5. How would you change the `ENTRYPOINT` and `CMD` in the Dockerfile to be more reasonable?
+7. How would you change the `ENTRYPOINT` and `CMD` in the Dockerfile to be more reasonable?
 
   - The entrypoint can be `ENTRYPOINT ["python", "script.py"]`
   - Leave the `CMD` empty, put defaults in the code
@@ -87,7 +89,7 @@ docker build -t <Your-dockerhub-username>/docker-demo:0.0.1 .
 3. Run the container
 
 ```bash
-docker run -p 2022:22 -v $PWD:/home/jovyan/work -w /home/jovyan/work image1
+docker run -p 2022:22 -v $PWD:/home/jovyan/work -w /home/jovyan/work <Your-dockerhub-username>/docker-demo:0.0.1
 ```
 
 4. SSH into the container
@@ -96,17 +98,36 @@ docker run -p 2022:22 -v $PWD:/home/jovyan/work -w /home/jovyan/work image1
 ssh -p 2022 jovyan@localhost
 ```
 
-5. Install the python packages
+5. Other ways to access the container
+
+```bash
+docker exec -ti <container-name> bash
+```
+
+Or simply start the container with `bash` as the entrypoint, but note that this will
+then override the existing entrypoint and NOT start the SSH server.
+
+```bash
+docker run -v $PWD:/home/jovyan/work -w /home/jovyan/work --entrypoint bash <Your-dockerhub-username>/docker-demo:0.0.1
+```
+
+6. Install the python packages
 
 ```bash
 cd /home/jovyan/work
 conda env create -f environment.yml
 ```
 
-6. Activate the environment and run the experiments
+7. Activate the environment and run the experiments
 
 ```bash
 cd /home/jovyan/work
 conda activate demopkg
 python experiments/train_mlp.py
 ```
+
+8. Use VS Code to access the container via SSH and run the jupyter notebook in `notebooks`.
+
+VS Code allows you to connect via SSH simply by defining the SSH command that you used previously 
+to connect in the shell earlier. After this you will have to open the right folder in the remote VS 
+Code window that will open, install and activate the python environment and run the notebook.
