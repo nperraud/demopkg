@@ -1,11 +1,9 @@
 demopkg: Demo packages with pytorch lightning
 =============================================
 
-Once this is done, you can proceed with the instatllation of the package as described below.
-
 
 Getting started
-===============
+---------------
 
 To get started, make sure you have the necessary permissions and clone the repository:
 
@@ -14,8 +12,9 @@ To get started, make sure you have the necessary permissions and clone the repos
    git https://github.com/nperraud/demopkg.git
    cd demopkg
 
+
 Working with Poetry
-====================
+-------------------
 
 To install Poetry, run the following command in the terminal:
 
@@ -31,7 +30,7 @@ Activate the Poetry shell and install the dependencies:
    poetry install
 
 Working with Conda
-==================
+------------------
 
 To install miniconda, run the following command in the terminal:
 
@@ -47,6 +46,8 @@ Create a conda environment and install the dependencies:
    conda create -n demopkg python=3.11
    conda activate demopkg
    conda 
+
+
 
 
 Tests
@@ -99,13 +100,3 @@ To help you to get the right format, you can use `black`:
 .. code-block:: bash
 
    black demopkg
-
-Package information
--------------------
-
-The package information is stored in the file pyproject.toml. Update the information accordingly.
-
-
-
-TODOs
------
