@@ -43,10 +43,7 @@ Create a conda environment and install the dependencies:
 
 .. code-block:: bash
 
-   conda create -n demopkg python=3.11
-   conda activate demopkg
-   conda 
-
+   conda env create -f environment.yml
 
 
 
